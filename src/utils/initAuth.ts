@@ -13,17 +13,17 @@ const initAuth = () => {
       console.error(err);
     },
     // firebaseAuthEmulatorHost: "localhost:9099",
-    // firebaseAdminInitConfig: {
-    //   credential: {
-    //     projectId: "symptomdiaryio",
-    //     clientEmail: process.env.FIREBASE_CLIENT_EMAIL ?? "",
-    //     // The private key must not be accessible on the client side.
-    //     privateKey: process.env.FIREBASE_PRIVATE_KEY ?? "",
-    //   },
-    //   databaseURL: "https://my-example-app.firebaseio.com",
-    // },
+    firebaseAdminInitConfig: {
+      credential: {
+        projectId: "symptomdiaryio",
+        clientEmail: process.env.FIREBASE_CLIENT_EMAIL ?? "",
+        // The private key must not be accessible on the client side.
+        privateKey: process.env.FIREBASE_PRIVATE_KEY ?? "",
+      },
+      databaseURL: "https://symptomdiaryio.firebaseio.com",
+    },
     // Use application default credentials (takes precedence over firebaseAdminInitConfig if set)
-    // useFirebaseAdminDefaultCredential: true,
+    useFirebaseAdminDefaultCredential: true,
     firebaseClientInitConfig: {
       apiKey: process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY ?? "", // required
       authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN ?? "",
