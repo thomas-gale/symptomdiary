@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import initAuth from "../utils/initAuth";
+import initAuth from "../firebase/initAuth";
 
 initAuth();
 
