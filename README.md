@@ -6,6 +6,26 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+### Create .env.local
+```
+# Public environment variables for firebase config/options.
+NEXT_PUBLIC_FIREBASE_API_KEY=***************************************
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=******************************
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=**************
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=**************.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID=************
+NEXT_PUBLIC_FIREBASE_APP_ID=1:************:***:**********************
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-**********
+
+# Secrets used to access the Firebase Admin SDK.
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-*****@**************.iam.gserviceaccount.com
+FIREBASE_PRIVATE_KEY='-----BEGIN PRIVATE KEY-----\n*******************\n-----END PRIVATE KEY-----\n'
+
+# Secrets used to sign cookies.
+COOKIE_SECRET_CURRENT=****************************
+COOKIE_SECRET_PREVIOUS=********************************
+```
+
 First, run the development server:
 
 ```bash
