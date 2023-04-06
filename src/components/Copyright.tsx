@@ -11,8 +11,8 @@ export default function Copyright(props: any) {
       {...props}
     >
       {"Copyright © "}
-      <MuiLink color="inherit" href="https://mui.com/">
-        Your Website
+      <MuiLink color="inherit" href="https://symptomdiary.io/">
+        Symptom Diary
       </MuiLink>{" "}
       {new Date().getFullYear()}
       {"."}
