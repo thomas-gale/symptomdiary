@@ -99,7 +99,7 @@ export default function SignInSide() {
               >
                 Sign In
               </Button>
-              <Grid container>
+              {/* <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
@@ -110,7 +110,7 @@ export default function SignInSide() {
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
-              </Grid>
+              </Grid> */}
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
