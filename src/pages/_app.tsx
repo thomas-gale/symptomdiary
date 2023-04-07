@@ -6,6 +6,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "@/env/theme";
 import createEmotionCache from "@/env/createEmotionCache";
+import initAuth from "@/firebase/initAuth";
+
+// Next firebase auth helper
+initAuth();
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

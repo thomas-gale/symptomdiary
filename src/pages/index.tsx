@@ -1,9 +1,13 @@
-import * as React from "react";
 import Container from "@mui/material/Container";
 import Head from "next/head";
 import SignInSide from "@/components/SignIn";
+import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
+import { Loader } from "@/components/Loader";
+import Dashboard from "@/components/dashboard/Dashboard";
 
-export default function Home() {
+const Home = () => {
+  const AuthUser = useAuthUser();
+
   return (
     <>
       <Head>
@@ -29,9 +33,14 @@ export default function Home() {
         />
         <link rel="manifest" href="/site.webmanifest"></link>
       </Head>
-      <Container maxWidth="lg">
-        <SignInSide />
-      </Container>
+      <>{!AuthUser.id ? <SignInSide /> : <Dashboard />}</>
     </>
   );
-}
+};
+
+export default withAuthUser({
+  whenAuthed: AuthAction.RENDER,
+  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+  whenUnauthedAfterInit: AuthAction.RENDER,
+  LoaderComponent: Loader,
+})(Home);

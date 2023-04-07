@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -14,19 +14,47 @@ import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "@/env/theme";
 import Copyright from "./Copyright";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/config";
+import { useRouter } from "next/router";
+import { Container } from "@mui/material";
 
 export default function SignInSide() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        data.get("email") as string,
+        data.get("password") as string
+      );
+      const user = userCredential.user;
+      const idToken = await user.getIdToken();
+
+      console.log("idToken", idToken);
+
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${idToken}`,
+        },
+      });
+
+      if (response.ok) {
+        router.push("/");
+      } else {
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <Container maxWidth="lg">
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -116,6 +144,6 @@ export default function SignInSide() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </Container>
   );
 }
