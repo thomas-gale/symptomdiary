@@ -24,6 +24,7 @@ import Orders from "./Orders";
 import { Avatar, Stack } from "@mui/material";
 import { User } from "./User";
 import Copyright from "../Copyright";
+import { useCallback } from "react";
 
 const drawerWidth: number = 240;
 
@@ -77,9 +78,9 @@ const Drawer = styled(MuiDrawer, {
 
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
+  const toggleDrawer = useCallback(() => {
     setOpen(!open);
-  };
+  }, [open]);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -117,9 +118,7 @@ function DashboardContent() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton color="inherit">
-              <User />
-            </IconButton>
+            <User />
           </Stack>
         </Toolbar>
       </AppBar>
