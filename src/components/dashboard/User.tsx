@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
 import { auth } from "@/firebase/config";
+import { useAuthUser } from "next-firebase-auth";
 
 export const User = () => {
+  const AuthUser = useAuthUser();
+  useEffect(() => {
+    console.log(AuthUser);
+  }, [AuthUser]);
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -14,7 +20,6 @@ export const User = () => {
   const handleLogout = async () => {
     try {
       await auth.signOut();
-      // await firebase.auth().signOut();
       const response = await fetch("/api/logout", {
         method: "POST",
         headers: {
@@ -22,9 +27,7 @@ export const User = () => {
         },
       });
 
-      if (response.ok) {
-        // router.push("/auth");
-      } else {
+      if (!response.ok) {
         console.error("Logout failed");
       }
     } catch (error) {
@@ -34,21 +37,22 @@ export const User = () => {
   return (
     <>
       <IconButton
+        id="user-button"
         color="inherit"
-        aria-controls={open ? "basic-menu" : undefined}
+        aria-controls={open ? "user-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <Avatar>TG</Avatar>
+        <Avatar>{AuthUser.email?.charAt(0).toUpperCase()}</Avatar>
       </IconButton>
       <Menu
-        id="basic-menu"
+        id="user-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          "aria-labelledby": "basic-button",
+          "aria-labelledby": "user-button",
         }}
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
