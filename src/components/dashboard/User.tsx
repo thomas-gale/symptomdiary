@@ -34,7 +34,10 @@ export const User = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <Avatar>{session?.user?.name?.charAt(0).toUpperCase()}</Avatar>
+        <Avatar
+          alt={session?.user?.name as string}
+          src={session?.user?.image as string}
+        />
       </IconButton>
       <Menu
         id="user-menu"
