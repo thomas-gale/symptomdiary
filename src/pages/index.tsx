@@ -1,27 +1,14 @@
 import Head from "next/head";
 import SignInSide from "@/components/SignIn";
-// import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { Loader } from "@/components/Loader";
+import { useSession } from "next-auth/react";
 import Dashboard from "@/components/dashboard/Dashboard";
+import { Session, getServerSession } from "next-auth";
+import { GetServerSideProps } from "next";
+import authOptions from "@/pages/api/auth/[...nextauth]";
 
-export default function Home() {
-  // const AuthUser = useAuthUser();
-  const { data: session } = useSession();
-  // if (session) {
-  //   return (
-  //     <>
-  //       Signed in as {session?.user?.email} <br />
-  //       <button onClick={() => signOut()}>Sign out</button>
-  //     </>
-  //   );
-  // }
-  // return (
-  //   <>
-  //     Not signed in <br />
-  //     <button onClick={() => signIn("google")}>Sign in with Google</button>
-  //   </>
-  // );
+export default function Home({ session }: { session: Session | null }) {
+  // const { data: session } = useSession();
+
   return (
     <>
       <Head>
@@ -53,9 +40,17 @@ export default function Home() {
   );
 }
 
-// export default withAuthUser({
-//   whenAuthed: AuthAction.RENDER,
-//   whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
-//   whenUnauthedAfterInit: AuthAction.RENDER,
-//   LoaderComponent: Loader,
-// })(Home);
+// Add server side rendering for preventing flash of unauthenticated content
+export const getServerSideProps: GetServerSideProps<{
+  session: Session | null;
+}> = async (context) => {
+  const session = (await getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  )) as Session;
+
+  return {
+    props: { session },
+  };
+};

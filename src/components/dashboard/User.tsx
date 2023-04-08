@@ -1,13 +1,8 @@
 import { useCallback, useState } from "react";
-import { Avatar, IconButton, Menu, MenuItem, Modal } from "@mui/material";
-// import { auth } from "@/firebase/config";
-// import { useAuthUser } from "next-firebase-auth";
-// import { Loader } from "../Loader";
+import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
 import { useSession, signOut } from "next-auth/react";
 
 export const User = () => {
-  // const AuthUser = useAuthUser();
-
   const { data: session } = useSession();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -21,27 +16,6 @@ export const User = () => {
   const handleClose = useCallback(() => {
     setAnchorEl(null);
   }, []);
-
-  // const [loggingOut, setLoggingOut] = useState(false);
-  // const handleLogout = useCallback(async () => {
-  //   setLoggingOut(true);
-  //   try {
-  //     await auth.signOut();
-  //     const response = await fetch("/api/logout", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     if (!response.ok) {
-  //       console.error("Logout failed");
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   } finally {
-  //     setLoggingOut(false);
-  //   }
-  // }, []);
 
   return (
     <>
@@ -66,12 +40,8 @@ export const User = () => {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        {/* <MenuItem onClick={handleLogout}>Logout</MenuItem> */}
         <MenuItem onClick={() => signOut()}>Logout</MenuItem>
       </Menu>
-      {/* <Modal open={loggingOut}>
-        <Loader />
-      </Modal> */}
     </>
   );
 };
