@@ -23,7 +23,7 @@ import Orders from "./Orders";
 import { Stack } from "@mui/material";
 import { User } from "./User";
 import Copyright from "../Copyright";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 const drawerWidth: number = 240;
 
@@ -76,7 +76,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 function DashboardContent() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(false);
   const toggleDrawer = useCallback(() => {
     setOpen(!open);
   }, [open]);
