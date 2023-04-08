@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 // import FormControlLabel from "@mui/material/FormControlLabel";
 // import Checkbox from "@mui/material/Checkbox";
 // import Link from "@mui/material/Link";
+import GoogleIcon from "@mui/icons-material/Google";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -16,42 +17,43 @@ import Copyright from "./Copyright";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { Loader } from "./Loader";
+import { signIn } from "next-auth/react";
 
 export default function SignInSide() {
-  const [loggingIn, setLoggingIn] = React.useState(false);
-  const handleSubmit = React.useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
-      setLoggingIn(true);
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          data.get("email") as string,
-          data.get("password") as string
-        );
-        const user = userCredential.user;
-        const idToken = await user.getIdToken();
+  // const [loggingIn, setLoggingIn] = React.useState(false);
+  // const handleSubmit = React.useCallback(
+  //   async (event: React.FormEvent<HTMLFormElement>) => {
+  //     setLoggingIn(true);
+  //     event.preventDefault();
+  //     const data = new FormData(event.currentTarget);
+  //     try {
+  //       const userCredential = await signInWithEmailAndPassword(
+  //         auth,
+  //         data.get("email") as string,
+  //         data.get("password") as string
+  //       );
+  //       const user = userCredential.user;
+  //       const idToken = await user.getIdToken();
 
-        const response = await fetch("/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-          },
-        });
+  //       const response = await fetch("/api/login", {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${idToken}`,
+  //         },
+  //       });
 
-        if (!response.ok) {
-          console.error("Login failed");
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoggingIn(false);
-      }
-    },
-    []
-  );
+  //       if (!response.ok) {
+  //         console.error("Login failed");
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     } finally {
+  //       setLoggingIn(false);
+  //     }
+  //   },
+  //   []
+  // );
 
   return (
     <>
@@ -99,12 +101,12 @@ export default function SignInSide() {
                 Sign in
               </Typography>
               <Box
-                component="form"
-                noValidate
-                onSubmit={handleSubmit}
+                // component="form"
+                // noValidate
+                // onSubmit={handleSubmit}
                 sx={{ mt: 1 }}
               >
-                <TextField
+                {/* <TextField
                   margin="normal"
                   required
                   fullWidth
@@ -123,18 +125,20 @@ export default function SignInSide() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                />
+                /> */}
                 {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               /> */}
                 <Button
-                  type="submit"
+                  // type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  onClick={() => signIn("google")}
+                  startIcon={<GoogleIcon />}
+                  sx={{ mt: 3 }}
                 >
-                  Sign In
+                  Sign In with Google
                 </Button>
                 {/* <Grid container>
                 <Grid item xs>
@@ -154,9 +158,9 @@ export default function SignInSide() {
           </Grid>
         </Grid>
       </Container>
-      <Modal open={loggingIn}>
+      {/* <Modal open={loggingIn}>
         <Loader />
-      </Modal>
+      </Modal> */}
     </>
   );
 }

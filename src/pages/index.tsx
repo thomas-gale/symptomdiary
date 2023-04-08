@@ -1,12 +1,27 @@
 import Head from "next/head";
 import SignInSide from "@/components/SignIn";
-import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
+// import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { Loader } from "@/components/Loader";
 import Dashboard from "@/components/dashboard/Dashboard";
 
-const Home = () => {
-  const AuthUser = useAuthUser();
-
+export default function Home() {
+  // const AuthUser = useAuthUser();
+  const { data: session } = useSession();
+  // if (session) {
+  //   return (
+  //     <>
+  //       Signed in as {session?.user?.email} <br />
+  //       <button onClick={() => signOut()}>Sign out</button>
+  //     </>
+  //   );
+  // }
+  // return (
+  //   <>
+  //     Not signed in <br />
+  //     <button onClick={() => signIn("google")}>Sign in with Google</button>
+  //   </>
+  // );
   return (
     <>
       <Head>
@@ -33,14 +48,14 @@ const Home = () => {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="preconnect" href="https://apis.google.com" />
       </Head>
-      <>{!AuthUser.id ? <SignInSide /> : <Dashboard />}</>
+      <>{!session ? <SignInSide /> : <Dashboard />}</>
     </>
   );
-};
+}
 
-export default withAuthUser({
-  whenAuthed: AuthAction.RENDER,
-  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
-  whenUnauthedAfterInit: AuthAction.RENDER,
-  LoaderComponent: Loader,
-})(Home);
+// export default withAuthUser({
+//   whenAuthed: AuthAction.RENDER,
+//   whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+//   whenUnauthedAfterInit: AuthAction.RENDER,
+//   LoaderComponent: Loader,
+// })(Home);

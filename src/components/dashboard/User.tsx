@@ -1,11 +1,14 @@
 import { useCallback, useState } from "react";
 import { Avatar, IconButton, Menu, MenuItem, Modal } from "@mui/material";
-import { auth } from "@/firebase/config";
-import { useAuthUser } from "next-firebase-auth";
-import { Loader } from "../Loader";
+// import { auth } from "@/firebase/config";
+// import { useAuthUser } from "next-firebase-auth";
+// import { Loader } from "../Loader";
+import { useSession, signOut } from "next-auth/react";
 
 export const User = () => {
-  const AuthUser = useAuthUser();
+  // const AuthUser = useAuthUser();
+
+  const { data: session } = useSession();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -19,26 +22,26 @@ export const User = () => {
     setAnchorEl(null);
   }, []);
 
-  const [loggingOut, setLoggingOut] = useState(false);
-  const handleLogout = useCallback(async () => {
-    setLoggingOut(true);
-    try {
-      await auth.signOut();
-      const response = await fetch("/api/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (!response.ok) {
-        console.error("Logout failed");
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoggingOut(false);
-    }
-  }, []);
+  // const [loggingOut, setLoggingOut] = useState(false);
+  // const handleLogout = useCallback(async () => {
+  //   setLoggingOut(true);
+  //   try {
+  //     await auth.signOut();
+  //     const response = await fetch("/api/logout", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     if (!response.ok) {
+  //       console.error("Logout failed");
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   } finally {
+  //     setLoggingOut(false);
+  //   }
+  // }, []);
 
   return (
     <>
@@ -50,7 +53,7 @@ export const User = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <Avatar>{AuthUser.email?.charAt(0).toUpperCase()}</Avatar>
+        <Avatar>{session?.user?.name?.charAt(0).toUpperCase()}</Avatar>
       </IconButton>
       <Menu
         id="user-menu"
@@ -63,11 +66,12 @@ export const User = () => {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        {/* <MenuItem onClick={handleLogout}>Logout</MenuItem> */}
+        <MenuItem onClick={() => signOut()}>Logout</MenuItem>
       </Menu>
-      <Modal open={loggingOut}>
+      {/* <Modal open={loggingOut}>
         <Loader />
-      </Modal>
+      </Modal> */}
     </>
   );
 };
