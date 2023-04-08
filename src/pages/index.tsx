@@ -1,10 +1,11 @@
+import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { Session, getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import SignInSide from "@/components/SignIn";
 import Dashboard from "@/components/dashboard/Dashboard";
-import { useSession } from "next-auth/react";
 
-export default function Home() {
-  const { data: session } = useSession();
+export default function Home({ session }: { session: Session | null }) {
   return (
     <>
       <Head>
@@ -35,3 +36,17 @@ export default function Home() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps<{
+  session: Session | null;
+}> = async (context) => {
+  const session: Session | null = await getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  return {
+    props: { session },
+  };
+};
