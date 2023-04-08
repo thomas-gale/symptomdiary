@@ -1,14 +1,11 @@
-import Head from "next/head";
-import SignInSide from "@/components/SignIn";
-import { useSession } from "next-auth/react";
-import Dashboard from "@/components/dashboard/Dashboard";
-import { Session, getServerSession } from "next-auth";
 import { GetServerSideProps } from "next";
-import authOptions from "@/pages/api/auth/[...nextauth]";
+import Head from "next/head";
+import { Session, getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import SignInSide from "@/components/SignIn";
+import Dashboard from "@/components/dashboard/Dashboard";
 
 export default function Home({ session }: { session: Session | null }) {
-  // const { data: session } = useSession();
-
   return (
     <>
       <Head>
@@ -40,15 +37,14 @@ export default function Home({ session }: { session: Session | null }) {
   );
 }
 
-// Add server side rendering for preventing flash of unauthenticated content
 export const getServerSideProps: GetServerSideProps<{
   session: Session | null;
 }> = async (context) => {
-  const session = (await getServerSession(
+  const session: Session | null = await getServerSession(
     context.req,
     context.res,
     authOptions
-  )) as Session;
+  );
 
   return {
     props: { session },
