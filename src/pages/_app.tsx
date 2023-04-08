@@ -9,11 +9,6 @@ import createEmotionCache from "@/env/createEmotionCache";
 import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
 
-// import initAuth from "@/firebase/initAuth";
-
-// Next firebase auth helper
-// initAuth();
-
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
