@@ -50,10 +50,10 @@ export const User = () => {
         <MenuItem disabled={loading} onClick={handleSignOut}>
           Logout
         </MenuItem>
-        <Modal open={loading}>
-          <Loader />
-        </Modal>
       </Menu>
+      {/* <Modal open={loading}>
+        <Loader />
+      </Modal> */}
     </>
   );
 };
