@@ -17,15 +17,20 @@ NEXT_PUBLIC_FIREBASE_MESSAGE_SENDER_ID=************
 NEXT_PUBLIC_FIREBASE_APP_ID=1:************:***:**********************
 NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-**********
 
+# Next auth (local)
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=********************************************
+
+# Secrets for google auth
+GOOGLE_CLIENT_ID=422875462026-h0k6nvnjtmf86m7j36o5mfd4rnjdm2fj.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
+
 # Secrets used to access the Firebase Admin SDK.
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk-*****@**************.iam.gserviceaccount.com
 FIREBASE_PRIVATE_KEY='-----BEGIN PRIVATE KEY-----\n*******************\n-----END PRIVATE KEY-----\n'
-
-# Secrets used to sign cookies.
-COOKIE_SECRET_CURRENT=****************************
-COOKIE_SECRET_PREVIOUS=********************************
 ```
 
+### Next.js notes
 First, run the development server:
 
 ```bash
