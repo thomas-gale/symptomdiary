@@ -11,8 +11,15 @@ import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Copyright from "./Copyright";
 import { signIn } from "next-auth/react";
+import { useCallback, useState } from "react";
+import { LoadingButton } from "@mui/lab";
 
-export default function SignInSide() {
+export default function SignIn() {
+  const [loading, setLoading] = useState(false);
+  const handleGoogleSignIn = useCallback(async () => {
+    setLoading(true);
+    await signIn("google");
+  }, []);
   return (
     <>
       <Container maxWidth="lg">
@@ -58,19 +65,19 @@ export default function SignInSide() {
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
-              <Box
-                sx={{ mt: 1 }}
-              >
-       
-                <Button
+              <Box sx={{ mt: 1 }}>
+                <LoadingButton
                   fullWidth
                   variant="contained"
-                  onClick={() => signIn("google")}
+                  onClick={handleGoogleSignIn}
+                  disabled={loading}
+                  loading={loading}
+                  loadingPosition="start"
                   startIcon={<GoogleIcon />}
                   sx={{ mt: 3 }}
                 >
                   Sign In with Google
-                </Button>
+                </LoadingButton>
                 <Copyright sx={{ mt: 5 }} />
               </Box>
             </Box>

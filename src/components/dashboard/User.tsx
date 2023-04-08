@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
-import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
+import { Avatar, IconButton, Menu, MenuItem, Modal } from "@mui/material";
 import { useSession, signOut } from "next-auth/react";
+import { Loader } from "../Loader";
 
 export const User = () => {
   const { data: session } = useSession();
@@ -15,6 +16,12 @@ export const User = () => {
   );
   const handleClose = useCallback(() => {
     setAnchorEl(null);
+  }, []);
+
+  const [loading, setLoading] = useState(false);
+  const handleSignOut = useCallback(async () => {
+    setLoading(true);
+    await signOut();
   }, []);
 
   return (
@@ -40,7 +47,12 @@ export const User = () => {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+        <MenuItem disabled={loading} onClick={handleSignOut}>
+          Logout
+        </MenuItem>
+        <Modal open={loading}>
+          <Loader />
+        </Modal>
       </Menu>
     </>
   );
