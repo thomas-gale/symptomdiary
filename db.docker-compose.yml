@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  symptom-diary-postgresql:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: symptom-diary-postgresql-pass
+    ports:
+      - 5432:5432
+    volumes:
+      - symptom-diary-postgresql:/var/lib/postgresql/data postgres
+volumes:
+  symptom-diary-postgresql:

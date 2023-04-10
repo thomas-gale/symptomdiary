@@ -30,6 +30,9 @@ FIREBASE_CLIENT_EMAIL=firebase-adminsdk-*****@**************.iam.gserviceaccount
 FIREBASE_PRIVATE_KEY='-----BEGIN PRIVATE KEY-----\n*******************\n-----END PRIVATE KEY-----\n'
 ```
 
+### Local Postgresql (in separate terminal)
+- `docker-compose -f db.docker-compose.yml up`
+
 ### Next.js notes
 First, run the development server:
 
