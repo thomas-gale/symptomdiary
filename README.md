@@ -22,12 +22,11 @@ NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=********************************************
 
 # Secrets for google auth
-GOOGLE_CLIENT_ID=422875462026-h0k6nvnjtmf86m7j36o5mfd4rnjdm2fj.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=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
+GOOGLE_CLIENT_ID=************************************************************************
+GOOGLE_CLIENT_SECRET=***********************************
 
-# Secrets used to access the Firebase Admin SDK.
-FIREBASE_CLIENT_EMAIL=firebase-adminsdk-*****@**************.iam.gserviceaccount.com
-FIREBASE_PRIVATE_KEY='-----BEGIN PRIVATE KEY-----\n*******************\n-----END PRIVATE KEY-----\n'
+# Prisma (local)
+DATABASE_URL="mysql://root:localpassword@localhost:3306/symptomdiary"
 ```
 
 ### Local Postgresql (in separate terminal)
