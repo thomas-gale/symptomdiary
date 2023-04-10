@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { type GetServerSideProps, type NextPage } from "next";
-import { type Session, getServerSession } from "next-auth";
-import { authOptions } from "~/server/auth";
+import { type Session } from "next-auth";
+import { getServerAuthSession } from "~/server/auth";
 import SignIn from "~/components/SignIn";
 import Dashboard from "~/components/dashboard/Dashboard";
 
@@ -41,15 +41,8 @@ const Home: NextPage<{ session: Session | null }> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps<{
-  session: Session | null;
-}> = async (context) => {
-  const session: Session | null = await getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
-
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await getServerAuthSession(ctx);
   return {
     props: { session },
   };
