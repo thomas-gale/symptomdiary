@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { api } from "~/utils/api";
 import { type GetServerSideProps, type NextPage } from "next";
 import { type Session, getServerSession } from "next-auth";
 import { authOptions } from "~/server/auth";
@@ -11,8 +10,6 @@ const Home: NextPage<{ session: Session | null }> = ({
 }: {
   session: Session | null;
 }) => {
-  const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
   return (
     <>
       <Head>
@@ -39,9 +36,6 @@ const Home: NextPage<{ session: Session | null }> = ({
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="preconnect" href="https://apis.google.com" />
       </Head>
-      <p className="text-2xl text-purple-600">
-        {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-      </p>
       <>{!session ? <SignIn /> : <Dashboard />}</>
     </>
   );
