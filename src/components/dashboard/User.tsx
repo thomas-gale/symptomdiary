@@ -19,9 +19,11 @@ export const User = () => {
   }, []);
 
   const [loading, setLoading] = useState(false);
-  const handleSignOut = useCallback(async () => {
-    setLoading(true);
-    await signOut();
+  const handleSignOut = useCallback(() => {
+    void (async () => {
+      setLoading(true);
+      await signOut();
+    })();
   }, []);
 
   return (

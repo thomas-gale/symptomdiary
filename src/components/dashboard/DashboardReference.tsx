@@ -25,7 +25,7 @@ import { User } from "./User";
 import Copyright from "../Copyright";
 import { useCallback, useState } from "react";
 
-const drawerWidth: number = 240;
+const drawerWidth = 240;
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;

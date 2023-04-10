@@ -2,7 +2,7 @@
 A smarter symptom and medication diary
 
 ## Dev notes
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Based on https://create.t3.gg/
 
 ## Getting Started
 

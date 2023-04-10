@@ -24,7 +24,7 @@ import { useCallback, useState } from "react";
 import Symptoms from "./Symptoms";
 import AddSymptom from "./AddSymptoms";
 
-const drawerWidth: number = 240;
+const drawerWidth = 240;
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;

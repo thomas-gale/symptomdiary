@@ -16,10 +16,13 @@ import { LoadingButton } from "@mui/lab";
 
 export default function SignIn() {
   const [loading, setLoading] = useState(false);
-  const handleGoogleSignIn = useCallback(async () => {
-    setLoading(true);
-    await signIn("google");
+  const handleGoogleSignIn = useCallback(() => {
+    void (async () => {
+      setLoading(true);
+      await signIn("google");
+    })();
   }, []);
+
   return (
     <>
       <Container maxWidth="lg">

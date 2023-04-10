@@ -26,6 +26,7 @@ export default function AddSymptom() {
   const handleSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // TODO - write this data to firebase
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     console.log((e.target as any).symptoms.value);
   }, []);
 

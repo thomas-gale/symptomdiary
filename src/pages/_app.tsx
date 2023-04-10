@@ -1,27 +1,32 @@
 import * as React from "react";
 import Head from "next/head";
-import { AppProps } from "next/app";
+import { type AppProps } from "next/app";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { CacheProvider, EmotionCache } from "@emotion/react";
-import theme from "@/env/theme";
-import createEmotionCache from "@/env/createEmotionCache";
+import { CacheProvider, type EmotionCache } from "@emotion/react";
+import theme from "~/env/theme";
+import createEmotionCache from "~/env/createEmotionCache";
 import { SessionProvider } from "next-auth/react";
-import { Session } from "next-auth";
+import { type Session } from "next-auth";
+
+import { api } from "~/utils/api";
+
+import "~/styles/globals.css";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-export interface MyAppProps extends AppProps {
+export interface SymptomAppProps extends AppProps {
   emotionCache?: EmotionCache;
   session?: Session;
 }
 
-export default function MyApp(props: MyAppProps) {
+function SymptomApp(props: SymptomAppProps) {
   const {
     Component,
     emotionCache = clientSideEmotionCache,
     session,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     pageProps,
   } = props;
   return (
@@ -38,3 +43,5 @@ export default function MyApp(props: MyAppProps) {
     </SessionProvider>
   );
 }
+
+export default api.withTRPC(SymptomApp);
