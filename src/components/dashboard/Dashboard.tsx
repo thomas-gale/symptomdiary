@@ -23,6 +23,8 @@ import Copyright from "../Copyright";
 import { useCallback, useState } from "react";
 import Symptoms from "./Symptoms";
 import AddSymptom from "./AddSymptoms";
+import { useSession } from "next-auth/react";
+import { api } from "~/utils/api";
 
 const drawerWidth = 240;
 
@@ -79,6 +81,12 @@ function DashboardContent() {
   const toggleDrawer = useCallback(() => {
     setOpen(!open);
   }, [open]);
+
+  const { data: sessionData } = useSession();
+  const { data: secretMessage } = api.example.getSecretMessage.useQuery(
+    undefined, // no input
+    { enabled: sessionData?.user !== undefined }
+  );
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -155,6 +163,11 @@ function DashboardContent() {
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                {secretMessage}
+              </Paper>
+            </Grid>
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                 <Symptoms />
