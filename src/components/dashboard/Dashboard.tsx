@@ -3,7 +3,9 @@ import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import MuiAppBar, {
+  type AppBarProps as MuiAppBarProps,
+} from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -17,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems, secondaryListItems } from "./listItems";
-import { Fab, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { User } from "./User";
 import Copyright from "../Copyright";
 import { useCallback, useState } from "react";
@@ -165,7 +167,9 @@ function DashboardContent() {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                <div className="text:pink hover:text-blue-400">{secretMessage}</div>
+                <div className="text:pink hover:text-blue-400">
+                  {secretMessage}
+                </div>
               </Paper>
             </Grid>
             <Grid item xs={12}>

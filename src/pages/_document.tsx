@@ -4,14 +4,14 @@ import Document, {
   Head,
   Main,
   NextScript,
-  DocumentProps,
-  DocumentContext,
+  type DocumentProps,
+  type DocumentContext,
 } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
-import { AppType } from "next/app";
+import { type AppType } from "next/app";
 import theme, { roboto } from "~/env/theme";
 import createEmotionCache from "~/env/createEmotionCache";
-import { SymptomAppProps } from "./_app";
+import { type SymptomAppProps } from "./_app";
 
 interface MyDocumentProps extends DocumentProps {
   emotionStyleTags: JSX.Element[];

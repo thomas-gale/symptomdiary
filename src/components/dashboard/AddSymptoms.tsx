@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useState } from "react";
+import { type FormEvent, useCallback, useState } from "react";
 import {
   Box,
   Button,
@@ -26,7 +26,7 @@ export default function AddSymptom() {
   const handleSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // TODO - write this data to firebase
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
     console.log((e.target as any).symptoms.value);
   }, []);
 

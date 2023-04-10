@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
-import { Avatar, IconButton, Menu, MenuItem, Modal } from "@mui/material";
+import { Avatar, IconButton, Menu, MenuItem } from "@mui/material";
 import { useSession, signOut } from "next-auth/react";
-import { Loader } from "../Loader";
 
 export const User = () => {
   const { data: session } = useSession();
@@ -56,9 +55,6 @@ export const User = () => {
           Logout
         </MenuItem>
       </Menu>
-      {/* <Modal open={loading}>
-        <Loader />
-      </Modal> */}
     </>
   );
 };

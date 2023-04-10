@@ -30,21 +30,19 @@ function SymptomApp(props: SymptomAppProps) {
     pageProps,
   } = props;
   return (
-    <>
+    <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <SessionProvider session={session}>
-        <CacheProvider value={emotionCache}>
-          <StyledEngineProvider injectFirst>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <Component {...pageProps} />
-            </ThemeProvider>
-          </StyledEngineProvider>
-        </CacheProvider>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </StyledEngineProvider>
       </SessionProvider>
-    </>
+    </CacheProvider>
   );
 }
 
