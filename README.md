@@ -33,6 +33,9 @@ FIREBASE_PRIVATE_KEY='-----BEGIN PRIVATE KEY-----\n*******************\n-----END
 ### Local Postgresql (in separate terminal)
 - `docker-compose -f db.docker-compose.yml up`
 
+### Planetscale
+- `docker run --rm -it planetscale/pscale:latest -h`
+
 ### Next.js notes
 First, run the development server:
 

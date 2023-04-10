@@ -50,9 +50,11 @@ export const authOptions: NextAuthOptions = {
         return true;
       } else {
         // Return false to display a default error message
-        return false;
+        // return false;
         // Or you can return a URL to redirect to:
         // return '/unauthorized'
+        // Anyone else return to homepage for now
+        return "/";
       }
     },
   },

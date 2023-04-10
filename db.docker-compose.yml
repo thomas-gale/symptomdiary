@@ -1,12 +1,19 @@
 version: "3.7"
 services:
-  symptom-diary-postgresql:
-    image: postgres
+  symptom-diary-mysql:
+    image: mysql
+    restart: always
     environment:
-      POSTGRES_PASSWORD: symptom-diary-postgresql-pass
+      MYSQL_DATABASE: "symptomdiary"
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: "localuser"
+      # You can use whatever password you like
+      MYSQL_PASSWORD: "localpassword"
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: "localpassword"
     ports:
-      - 5432:5432
+      - 3306:3306
     volumes:
-      - symptom-diary-postgresql:/var/lib/postgresql/data postgres
+      - symptom-diary-mysql:/var/lib/mysql
 volumes:
-  symptom-diary-postgresql:
+  symptom-diary-mysql:
