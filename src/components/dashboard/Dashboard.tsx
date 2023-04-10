@@ -165,7 +165,7 @@ function DashboardContent() {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                {secretMessage}
+                <div className="text:pink hover:text-blue-400">{secretMessage}</div>
               </Paper>
             </Grid>
             <Grid item xs={12}>

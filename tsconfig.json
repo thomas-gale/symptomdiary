@@ -34,7 +34,7 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs"
-, "src/firebase/config.ts.old"  ],
+, "src/firebase/config.ts.old", "src/pages/_document.tsx"  ],
   "exclude": [
     "node_modules"
   ]

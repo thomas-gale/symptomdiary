@@ -42,7 +42,7 @@ const Home: NextPage<{ session: Session | null }> = ({
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="preconnect" href="https://apis.google.com" />
       </Head>
-      <p className="text-2xl text-white">
+      <p className="text-2xl text-purple-600">
         {hello.data ? hello.data.greeting : "Loading tRPC query..."}
       </p>
       <>{!session ? <SignIn /> : <Dashboard />}</>
