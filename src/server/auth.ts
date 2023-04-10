@@ -44,6 +44,17 @@ export const authOptions: NextAuthOptions = {
         id: user.id,
       },
     }),
+    signIn({ user }) {
+      const isAllowedToSignIn = user.email === env.ADMIN_EMAIL;
+      if (isAllowedToSignIn) {
+        return true;
+      } else {
+        // Return false to display a default error message
+        return false;
+        // Or you can return a URL to redirect to:
+        // return '/unauthorized'
+      }
+    },
   },
   adapter: PrismaAdapter(prisma),
   providers: [
