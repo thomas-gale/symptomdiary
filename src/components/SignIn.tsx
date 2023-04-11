@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import GoogleIcon from "@mui/icons-material/Google";
@@ -27,21 +28,11 @@ export default function SignIn() {
       <Container maxWidth="lg">
         <Grid container component="main" sx={{ height: "100vh" }}>
           <CssBaseline />
-          <Grid
-            item
-            xs={false}
-            sm={4}
-            md={7}
-            sx={{
-              backgroundImage: "url(/hero.png)",
-              backgroundRepeat: "no-repeat",
-              backgroundColor: (t) =>
-                t.palette.mode === "light"
-                  ? t.palette.grey[50]
-                  : t.palette.grey[900],
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
+          <Image
+            src="/hero.png"
+            alt="hero image"
+            fill
+            className="z-0 object-cover object-center"
           />
           <Grid
             item
@@ -51,6 +42,7 @@ export default function SignIn() {
             component={Paper}
             elevation={6}
             square
+            className="z-10"
           >
             <Box
               sx={{
