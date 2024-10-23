@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.21.3",
-    "@types/node": "18.15.11",
+    "@types/node": "18.19.59",
     "@types/prettier": "^2.7.2",
     "@types/react": "18.0.34",
     "@types/react-dom": "18.0.11",
